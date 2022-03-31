@@ -1,8 +1,9 @@
 package com.phone;
 
+import java.util.Date;
 import java.util.Objects;
 
-interface Work{
+interface Work {
     void workable();
 }
 
@@ -11,6 +12,11 @@ public abstract class Phone {
     private Screen screen;
     private String model;
     private String message;
+    private static int count;
+
+    static {
+        count = 0;
+    }
 
     public Phone() {
     }
@@ -20,6 +26,7 @@ public abstract class Phone {
         this.screen = screen;
         this.model = model;
         this.message = "Empty message";
+        count++;
     }
 
     public Battery getBattery() {
@@ -54,6 +61,10 @@ public abstract class Phone {
         this.message = message;
     }
 
+    public static int getCount() {
+        return count;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -78,4 +89,9 @@ public abstract class Phone {
     }
 
     public abstract void makeCall(Person from, Person to);
+
+    public static void finalCurrentTime() {
+        Date date = new Date();
+        System.out.println("Current time: " + date);
+    }
 }

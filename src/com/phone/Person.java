@@ -35,4 +35,9 @@ public class Person {
                 ", message = '" + message + '\'' +
                 '}';
     }
+
+    public final void BODY_MASS_INDEX(double height, double weight){
+        String bmi = String.format("%.2f",weight/(height*height));
+        System.out.println(personName + " BMI: " + bmi);
+    }
 }

@@ -5,8 +5,6 @@ interface Fax {
 }
 
 public class Telefax extends Phone implements Fax, Work {
-    private String isSomeoneCall = "No";
-
     public Telefax() {
     }
 
@@ -14,12 +12,6 @@ public class Telefax extends Phone implements Fax, Work {
         super(battery, screen, model);
     }
 
-    @Override
-    public String toString() {
-        return "Telefax{" +
-                "isSomeoneCall='" + isSomeoneCall + '\'' +
-                '}';
-    }
 
     @Override
     public void makeCall(Person from, Person to) {

@@ -2,18 +2,27 @@ package com.phone;
 
 public class Main {
     public static void main(String[] args) {
+        final String ALISON_NAME = "Alison";
+        final String SCOTT_NAME = "Scott";
+        final String STILES_NAME = "Stiles";
+
         Battery battery = new Battery(4000, "Samsung");
-        Person alison = new Person("Alison", "Hi, I'm Alison");
+        Person alison = new Person(ALISON_NAME, "Hi, I'm Alison");
         Screen screen = new Screen(6.7, "OLED");
 
         Battery battery2 = new Battery(3500, "Apple");
-        Person scott = new Person("Scott", "Hi, I'm Scott");
+        Person scott = new Person(SCOTT_NAME, "Hi, I'm Scott");
         Screen screen2 = new Screen(6.2, "IPS");
+
+        Battery battery3 = new Battery(5000, "Xiaomi");
+        Person stiles = new Person(STILES_NAME, "Hi, I'm Stiles");
+        Screen screen3 = new Screen(5.9, "IPS");
 
         MobilePhone samsungPhone = new MobilePhone(battery, screen, "Fold 3");
         MobilePhone applePhone = new MobilePhone(battery2, screen2, "13 Pro Max");
         Telefax fax = new Telefax(battery, screen, "HP Pavilion");
         LandlinePhone homePhone = new LandlinePhone(battery2, screen, "Samsung F535");
+        MobilePhone xiaomiPhone = new MobilePhone(battery3,screen3,"Mi 11 Lite");
 
         System.out.println(screen2.ppiOfScreen(scott.getPersonName()));
         System.out.println(samsungPhone.getModel());
@@ -34,18 +43,21 @@ public class Main {
         samsungPhone.workable();
         fax.workable();
         homePhone.workable();
+
+        System.out.println(samsungPhone.getScreen().getTechnologyOfScreen().equals(xiaomiPhone.getScreen().getTechnologyOfScreen()));
+
+        Phone.finalCurrentTime();
+        System.out.println(LandlinePhone.operator);
+
+        scott.BODY_MASS_INDEX(1.9,85);
+        alison.BODY_MASS_INDEX(1.65, 52);
+
+        System.out.println("Number of phones: " + Phone.getCount());
     }
 }
 
 /*
-Lab 3
-2.investigate gitignore and add it in your projects
-
 Lab 4
-- Add 5 interfaces to the existing hierarchy.
-- Use polymorphism with the abstract class and interface from the hierarchy.
-- Create final class, method, variable.
-- Create a static block, method, variable.
 - Update gitignore file. The Github repository should not have an .idea and out folders.
 
 Lab 5

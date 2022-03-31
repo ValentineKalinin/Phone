@@ -1,13 +1,18 @@
 package com.phone;
 
 public class LandlinePhone extends Phone implements Work {
-    private Cable cable = new Cable("Cable", 5);
+    static final String operator = "BelTelecom";
+    private final Cable cable = new Cable("Cable", 5);
 
     public LandlinePhone() {
     }
 
     public LandlinePhone(Battery battery, Screen screen, String model) {
         super(battery, screen, model);
+    }
+
+    public String getOperator() {
+        return operator;
     }
 
     @Override
