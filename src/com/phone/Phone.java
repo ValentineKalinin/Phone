@@ -1,0 +1,81 @@
+package com.phone;
+
+import java.util.Objects;
+
+interface Work{
+    void workable();
+}
+
+public abstract class Phone {
+    private Battery battery;
+    private Screen screen;
+    private String model;
+    private String message;
+
+    public Phone() {
+    }
+
+    public Phone(Battery battery, Screen screen, String model) {
+        this.battery = battery;
+        this.screen = screen;
+        this.model = model;
+        this.message = "Empty message";
+    }
+
+    public Battery getBattery() {
+        return battery;
+    }
+
+    public void setBattery(Battery battery) {
+        this.battery = battery;
+    }
+
+    public Screen getScreen() {
+        return screen;
+    }
+
+    public void setScreen(Screen screen) {
+        this.screen = screen;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Phone)) return false;
+        Phone phone = (Phone) o;
+        return Objects.equals(battery, phone.battery) && Objects.equals(screen, phone.screen) && Objects.equals(model, phone.model) && Objects.equals(message, phone.message);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(battery, screen, model, message);
+    }
+
+    @Override
+    public String toString() {
+        return "Phone{" +
+                "battery=" + battery +
+                ", screen=" + screen +
+                ", model='" + model + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
+
+    public abstract void makeCall(Person from, Person to);
+}
