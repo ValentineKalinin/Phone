@@ -2,7 +2,7 @@ package com.phone;
 
 import java.util.Objects;
 
-public final class Cable {
+public class Cable {
     private String cable;
     private int cableLength;
 

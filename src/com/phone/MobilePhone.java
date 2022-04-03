@@ -56,7 +56,7 @@ public class MobilePhone extends Phone implements SMS, Work {
     }
 
     @Override
-    public void workable(){
+    public void workable() {
         System.out.println(getModel() + " is work!");
     }
 }

@@ -28,7 +28,7 @@ public class LandlinePhone extends Phone implements Work {
     }
 
     @Override
-    public void workable(){
+    public void workable() {
         System.out.println(getModel() + " is work!");
     }
 }

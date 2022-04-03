@@ -1,10 +1,15 @@
 package com.phone;
 
+import Exceptions.BatteryException;
+
 public class Battery {
     private int capacity;
     private String brand;
 
-    public Battery(int capacity, String brand) {
+    public Battery(int capacity, String brand) throws BatteryException {
+        if (capacity <= 0) {
+            throw new BatteryException("Capacity of Battery is incorrect");
+        }
         this.capacity = capacity;
         this.brand = brand;
     }
@@ -13,7 +18,10 @@ public class Battery {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
+    public void setCapacity(int capacity) throws BatteryException {
+        if (capacity <= 0) {
+            throw new BatteryException("Capacity of Battery is incorrect");
+        }
         this.capacity = capacity;
     }
 

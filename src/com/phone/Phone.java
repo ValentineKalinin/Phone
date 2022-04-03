@@ -1,5 +1,7 @@
 package com.phone;
 
+import Exceptions.BatteryException;
+
 import java.util.Date;
 import java.util.Objects;
 
