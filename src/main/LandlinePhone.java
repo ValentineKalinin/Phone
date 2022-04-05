@@ -1,6 +1,9 @@
-package com.phone;
+package main;
 
-public class LandlinePhone extends Phone implements Work {
+import interfaces.IWorkable;
+import static main.Main.LOGGER;
+
+public class LandlinePhone extends Phone implements IWorkable {
     static final String operator = "BelTelecom";
     private final Cable cable = new Cable("Cable", 5);
 
@@ -24,7 +27,7 @@ public class LandlinePhone extends Phone implements Work {
 
     @Override
     public void makeCall(Person from, Person to) {
-        System.out.println(from.getPersonName() + " call to landline of " + to.getPersonName());
+        LOGGER.info(from.getPersonName() + " call to landline of " + to.getPersonName());
     }
 
     @Override

@@ -1,13 +1,9 @@
-package com.phone;
-
-import Exceptions.BatteryException;
+package main;
 
 import java.util.Date;
 import java.util.Objects;
+import static main.Main.LOGGER;
 
-interface Work {
-    void workable();
-}
 
 public abstract class Phone {
     private Battery battery;
@@ -94,6 +90,6 @@ public abstract class Phone {
 
     public static void finalCurrentTime() {
         Date date = new Date();
-        System.out.println("Current time: " + date);
+        LOGGER.info("Current time: " + date);
     }
 }

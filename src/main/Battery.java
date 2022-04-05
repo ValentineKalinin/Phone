@@ -1,14 +1,14 @@
-package com.phone;
+package main;
 
-import Exceptions.BatteryException;
+import exceptions.BatteryCapacityException;
 
 public class Battery {
     private int capacity;
     private String brand;
 
-    public Battery(int capacity, String brand) throws BatteryException {
+    public Battery(int capacity, String brand) throws BatteryCapacityException {
         if (capacity <= 0) {
-            throw new BatteryException("Capacity of Battery is incorrect");
+            throw new BatteryCapacityException("Capacity of Battery is incorrect");
         }
         this.capacity = capacity;
         this.brand = brand;
@@ -18,9 +18,9 @@ public class Battery {
         return capacity;
     }
 
-    public void setCapacity(int capacity) throws BatteryException {
+    public void setCapacity(int capacity) throws BatteryCapacityException {
         if (capacity <= 0) {
-            throw new BatteryException("Capacity of Battery is incorrect");
+            throw new BatteryCapacityException("Capacity of Battery is incorrect");
         }
         this.capacity = capacity;
     }
@@ -43,12 +43,12 @@ public class Battery {
 
     public String deterioration(String nameOfPerson, int capacityOfBattery) {
         double percent = (Math.random() * 500);
-        return ("\nDeterioration of " + nameOfPerson + "'s battery: " +
+        return ("Deterioration of " + nameOfPerson + "'s battery: " +
                 (int) ((capacityOfBattery - percent) / capacityOfBattery * 100) + "%");
     }
 
     public String workTime(String nameOfPerson) {
-        return ("\nWork time of " + nameOfPerson + "'s phone battery with watching Youtube: " +
+        return ("Work time of " + nameOfPerson + "'s phone battery with watching Youtube: " +
                 this.capacity / 500 + " hours");
     }
 }

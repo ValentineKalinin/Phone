@@ -1,6 +1,7 @@
-package com.phone;
+package main;
 
-import Exceptions.ScreenException;
+import exceptions.ScreenDiagonalException;
+import static main.Main.LOGGER;
 
 public class Screen {
     private double diagonalOfScreen;
@@ -11,9 +12,9 @@ public class Screen {
     public Screen() {
     }
 
-    public Screen(double diagonalOfScreen, String technologyOfScreen) throws ScreenException {
+    public Screen(double diagonalOfScreen, String technologyOfScreen) throws ScreenDiagonalException {
         if (diagonalOfScreen <= 0) {
-            throw new ScreenException("Diagonal of screen is incorrect");
+            throw new ScreenDiagonalException("Diagonal of screen is incorrect");
         }
         this.diagonalOfScreen = diagonalOfScreen;
         this.technologyOfScreen = technologyOfScreen;
@@ -23,9 +24,9 @@ public class Screen {
         return diagonalOfScreen;
     }
 
-    public void setDiagonalOfScreen(double diagonalOfScreen) throws ScreenException {
+    public void setDiagonalOfScreen(double diagonalOfScreen) throws ScreenDiagonalException {
         if (diagonalOfScreen <= 0) {
-            throw new ScreenException("Diagonal of screen is incorrect");
+            throw new ScreenDiagonalException("Diagonal of screen is incorrect");
         }
         this.diagonalOfScreen = diagonalOfScreen;
     }
@@ -38,9 +39,9 @@ public class Screen {
         this.technologyOfScreen = technologyOfScreen;
     }
 
-    public void setResolutionOfScreen(double verticalPixels, double horizontalPixel) throws ScreenException {
+    public void setResolutionOfScreen(double verticalPixels, double horizontalPixel) throws ScreenDiagonalException {
         if ((verticalPixels + horizontalPixel) < diagonalOfScreen * 450) {
-            throw new ScreenException("Size of screen is incorrect");
+            throw new ScreenDiagonalException("Size of screen is incorrect");
         }
         this.verticalPixels = verticalPixels;
         this.horizontalPixel = horizontalPixel;
@@ -73,6 +74,6 @@ public class Screen {
     }
 
     public void size() {
-        System.out.println("Screen size: " + horizontalPixel + " to " + verticalPixels);
+        LOGGER.info("Screen size: " + horizontalPixel + " to " + verticalPixels);
     }
 }

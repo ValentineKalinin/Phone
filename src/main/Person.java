@@ -1,6 +1,7 @@
-package com.phone;
+package main;
 
-import Exceptions.BodyException;
+import exceptions.BodyCharacteristicsException;
+import static main.Main.LOGGER;
 
 public class Person {
     private String personName;
@@ -38,11 +39,11 @@ public class Person {
                 '}';
     }
 
-    public final void BODY_MASS_INDEX(double height, double weight) throws BodyException {
+    public final void BODY_MASS_INDEX(double height, double weight) throws BodyCharacteristicsException {
         if (height <= 0 || weight <= 0) {
-            throw new BodyException("Problem with body characteristics");
+            throw new BodyCharacteristicsException("Problem with body characteristics");
         }
         String bmi = String.format("%.2f", weight / (height * height));
-        System.out.println(personName + " BMI: " + bmi);
+        LOGGER.info(personName + " BMI: " + bmi);
     }
 }

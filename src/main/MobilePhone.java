@@ -1,12 +1,12 @@
-package com.phone;
+package main;
+
+import interfaces.IShortMessageService;
+import interfaces.IWorkable;
+import static main.Main.LOGGER;
 
 import java.util.Objects;
 
-interface SMS {
-    void SendMessage(Person from, Person to, String mes);
-}
-
-public class MobilePhone extends Phone implements SMS, Work {
+public class MobilePhone extends Phone implements IShortMessageService, IWorkable {
     private String unlock;
 
     public MobilePhone() {
@@ -47,16 +47,16 @@ public class MobilePhone extends Phone implements SMS, Work {
 
     @Override
     public void makeCall(Person from, Person to) {
-        System.out.println(from.getPersonName() + " call to " + to.getPersonName() + " by landline phone");
+        LOGGER.info(from.getPersonName() + " call to " + to.getPersonName() + " by landline phone");
     }
 
     @Override
     public void SendMessage(Person from, Person to, String mes) {
-        System.out.println(from.getPersonName() + " send message \"" + mes + "\" to " + to.getPersonName());
+        LOGGER.info(from.getPersonName() + " send message \"" + mes + "\" to " + to.getPersonName());
     }
 
     @Override
     public void workable() {
-        System.out.println(getModel() + " is work!");
+        LOGGER.info(getModel() + " is work!");
     }
 }

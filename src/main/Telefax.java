@@ -1,10 +1,10 @@
-package com.phone;
+package main;
 
-interface Fax {
-    void SendFax(Person from, Person to, String fax);
-}
+import interfaces.IFax;
+import interfaces.IWorkable;
+import static main.Main.LOGGER;
 
-public class Telefax extends Phone implements Fax, Work {
+public class Telefax extends Phone implements IFax, IWorkable {
     public Telefax() {
     }
 
@@ -20,11 +20,11 @@ public class Telefax extends Phone implements Fax, Work {
 
     @Override
     public void SendFax(Person from, Person to, String fax) {
-        System.out.println(to.getPersonName() + " get fax \"" + fax + "\" from " + from.getPersonName());
+        LOGGER.info(to.getPersonName() + " get fax \"" + fax + "\" from " + from.getPersonName());
     }
 
     @Override
     public void workable() {
-        System.out.println(getModel() + " is work!");
+        LOGGER.info(getModel() + " is work!");
     }
 }

@@ -1,14 +1,16 @@
-package com.phone;
+package main;
 
-import Exceptions.BatteryException;
-import Exceptions.BodyException;
-import Exceptions.ScreenException;
+import exceptions.BatteryCapacityException;
+import exceptions.BodyCharacteristicsException;
+import exceptions.ScreenDiagonalException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.io.*;
 
 public class Main {
-    public static void main(String[] args) throws BatteryException, ScreenException, IOException {
-        FileWriter fileWriter = new FileWriter("src/OutputFiles/result.txt");
+    public static final Logger LOGGER = LogManager.getLogger(Main.class);
+    public static void main(String[] args) throws BatteryCapacityException, ScreenDiagonalException, IOException {
         try {
             final String ALISON_NAME = "Alison";
             final String SCOTT_NAME = "Scott";
@@ -32,17 +34,18 @@ public class Main {
             LandlinePhone homePhone = new LandlinePhone(battery2, screen, "Samsung F535");
             MobilePhone xiaomiPhone = new MobilePhone(battery3, screen3, "Mi 11 Lite");
 
-            System.out.println(screen2.ppiOfScreen(scott.getPersonName()));
-            System.out.println(samsungPhone.getModel());
-            System.out.println(applePhone.getBattery());
-            System.out.println(screen.workTime(alison.getPersonName(), battery.getCapacity()));
+            LOGGER.info("Enter username and password for computer.Macbook");
+            LOGGER.info(screen2.ppiOfScreen(scott.getPersonName()));
+            LOGGER.info(samsungPhone.getModel());
+            LOGGER.info(applePhone.getBattery());
+            LOGGER.info(screen.workTime(alison.getPersonName(), battery.getCapacity()));
 
-            System.out.println("\nModel at Apple: " + applePhone.getModel());
+            LOGGER.info("Model at Apple: " + applePhone.getModel());
             applePhone.setUnlock("Face ID");
-            System.out.println(applePhone.getModel() + " unlock by " + applePhone.getUnlock());
-            System.out.println("Screen at " + samsungPhone.getModel() + ": " + samsungPhone.getScreen());
+            LOGGER.info(applePhone.getModel() + " unlock by " + applePhone.getUnlock());
+            LOGGER.info("Screen at " + samsungPhone.getModel() + ": " + samsungPhone.getScreen());
 
-            System.out.println(battery.deterioration(alison.getPersonName(), battery.getCapacity()) +
+            LOGGER.info(battery.deterioration(alison.getPersonName(), battery.getCapacity()) +
                     battery.workTime(alison.getPersonName()));
 
             applePhone.SendMessage(alison, scott, alison.getMessage());
@@ -52,11 +55,11 @@ public class Main {
             fax.workable();
             homePhone.workable();
 
-            System.out.println(samsungPhone.getScreen().getTechnologyOfScreen().
+            LOGGER.info(samsungPhone.getScreen().getTechnologyOfScreen().
                     equals(xiaomiPhone.getScreen().getTechnologyOfScreen()));
 
             Phone.finalCurrentTime();
-            System.out.println(LandlinePhone.operator);
+            LOGGER.info(LandlinePhone.operator);
 
             scott.BODY_MASS_INDEX(1.9, 85);
             alison.BODY_MASS_INDEX(1.65, 52);
@@ -64,17 +67,11 @@ public class Main {
             screen.setResolutionOfScreen(1125, 2436);
             screen.size();
 
-            System.out.println("Number of phones: " + Phone.getCount());
-        } catch (BatteryException | ScreenException | BodyException e) {
-            fileWriter.write(e.getMessage());
-            System.err.println(e.getMessage());
-        } finally {
-            try {
-                fileWriter.write("All is good!");
-                fileWriter.close();
-            } catch (IOException e) {
-                System.err.println(e.getMessage());
-            }
+            LOGGER.info("Number of phones: " + Phone.getCount());
+        } catch (BatteryCapacityException | ScreenDiagonalException | BodyCharacteristicsException e) {
+            LOGGER.error(e.getMessage());
+        } catch (Exception ex) {
+            LOGGER.info(ex);
         }
     }
 
