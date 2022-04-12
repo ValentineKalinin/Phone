@@ -1,8 +1,8 @@
-package main;
+package main.java.phone;
 
-import interfaces.IFax;
-import interfaces.IWorkable;
-import static main.Main.LOGGER;
+import main.java.interfaces.IFax;
+import main.java.interfaces.IWorkable;
+import static main.java.phone.Main.LOGGER;
 
 public class Telefax extends Phone implements IFax, IWorkable {
     public Telefax() {

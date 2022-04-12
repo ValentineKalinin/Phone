@@ -1,7 +1,7 @@
-package main;
+package main.java.phone;
 
-import exceptions.BodyCharacteristicsException;
-import static main.Main.LOGGER;
+import main.java.exceptions.BodyCharacteristicsException;
+import static main.java.phone.Main.LOGGER;
 
 public class Person {
     private String personName;

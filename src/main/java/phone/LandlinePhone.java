@@ -1,7 +1,7 @@
-package main;
+package main.java.phone;
 
-import interfaces.IWorkable;
-import static main.Main.LOGGER;
+import main.java.interfaces.IWorkable;
+import static main.java.phone.Main.LOGGER;
 
 public class LandlinePhone extends Phone implements IWorkable {
     static final String operator = "BelTelecom";

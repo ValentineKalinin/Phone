@@ -1,4 +1,4 @@
-package main;
+package main.java.phone;
 
 import java.util.Objects;
 

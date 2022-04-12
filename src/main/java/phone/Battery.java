@@ -1,6 +1,6 @@
-package main;
+package main.java.phone;
 
-import exceptions.BatteryCapacityException;
+import main.java.exceptions.BatteryCapacityException;
 
 public class Battery {
     private int capacity;

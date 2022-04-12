@@ -1,7 +1,7 @@
-package main;
+package main.java.phone;
 
-import exceptions.ScreenDiagonalException;
-import static main.Main.LOGGER;
+import main.java.exceptions.ScreenDiagonalException;
+import static main.java.phone.Main.LOGGER;
 
 public class Screen {
     private double diagonalOfScreen;

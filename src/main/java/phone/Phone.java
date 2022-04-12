@@ -1,8 +1,8 @@
-package main;
+package main.java.phone;
 
 import java.util.Date;
 import java.util.Objects;
-import static main.Main.LOGGER;
+import static main.java.phone.Main.LOGGER;
 
 
 public abstract class Phone {

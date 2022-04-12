@@ -1,6 +1,6 @@
-package main;
+package main.java.phone;
 
-import static main.Main.LOGGER;
+import static main.java.phone.Main.LOGGER;
 
 public class NewLinkedList<T> {
     private Node<T> head;

@@ -1,8 +1,8 @@
-package main;
+package main.java.phone;
 
-import exceptions.BatteryCapacityException;
-import exceptions.BodyCharacteristicsException;
-import exceptions.ScreenDiagonalException;
+import main.java.exceptions.BatteryCapacityException;
+import main.java.exceptions.BodyCharacteristicsException;
+import main.java.exceptions.ScreenDiagonalException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

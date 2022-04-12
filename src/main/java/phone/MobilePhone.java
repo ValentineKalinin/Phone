@@ -1,8 +1,8 @@
-package main;
+package main.java.phone;
 
-import interfaces.IShortMessageService;
-import interfaces.IWorkable;
-import static main.Main.LOGGER;
+import main.java.interfaces.IShortMessageService;
+import main.java.interfaces.IWorkable;
+import static main.java.phone.Main.LOGGER;
 
 import java.util.List;
 import java.util.Objects;
