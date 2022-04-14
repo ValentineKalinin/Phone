@@ -4,15 +4,20 @@ import main.java.exceptions.BatteryCapacityException;
 import main.java.exceptions.BodyCharacteristicsException;
 import main.java.exceptions.ScreenDiagonalException;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import java.io.*;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     public static final Logger LOGGER = LogManager.getLogger(Main.class);
+
     public static void main(String[] args) throws BatteryCapacityException, ScreenDiagonalException, IOException {
         try {
             final String ALISON_NAME = "Alison";
@@ -98,7 +103,7 @@ public class Main {
             Map<String, Person> personMap = new HashMap();
             personMap.put("1", alison);
             personMap.put("2", scott);
-            personMap.put("3",stiles);
+            personMap.put("3", stiles);
             LOGGER.info(personMap.get("2").toString());
 
             LinkedList<MobilePhone> order = new LinkedList<>();
@@ -108,6 +113,16 @@ public class Main {
             MobilePhone.showOrder(order);
 
 
+            String s = StringUtils.lowerCase(FileUtils.readFileToString(
+                            new File("src/main/resources/text.txt"), String.valueOf(StandardCharsets.UTF_8)))
+                    .replaceAll("[^\\da-zA-Zа-яёА-ЯЁ ]", "");
+            String[] arr = s.split(" ");
+            Set<String> set = new HashSet(List.of(arr));
+            List<String> lst = set.stream()
+                    .map(x -> x + " " + StringUtils.countMatches(s, x))
+                    .collect(Collectors.toList());
+            FileUtils.writeLines(new File("src/main/resources/count.txt"), lst);
+            LOGGER.info("The file 'count.txt' with the numbers of the unique words was created");
         } catch (BatteryCapacityException | ScreenDiagonalException | BodyCharacteristicsException e) {
             LOGGER.error(e.getMessage());
         } catch (Exception ex) {
@@ -117,14 +132,8 @@ public class Main {
 
 }
 /*
-Lab 6.2
-Move project to Maven.
-Build jar file and deploy to the local repository.
-Add 2 Plugins.
-Run mvn for different phases from the Maven lifecycle. Check the result.
-
 Lab 7.1
-Read text from the file and calculate the numbers of the unique words.
+Read text.txt from the file and calculate the numbers of the unique words.
 Write the result to the file.
 The main requirement is: using StringUtils and FileUtils to implement it with minimum lines of code.
 
