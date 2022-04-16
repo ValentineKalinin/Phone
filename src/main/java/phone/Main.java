@@ -1,5 +1,7 @@
 package main.java.phone;
 
+import main.java.enums.PhoneBrands;
+import main.java.enums.Sex;
 import main.java.exceptions.BatteryCapacityException;
 import main.java.exceptions.BodyCharacteristicsException;
 import main.java.exceptions.ScreenDiagonalException;
@@ -25,20 +27,20 @@ public class Main {
             final String STILES_NAME = "Stiles";
 
             Battery battery = new Battery(4000, "Samsung");
-            Person alison = new Person(ALISON_NAME, "Hi, I'm Alison");
+            Person alison = new Person(ALISON_NAME, "Hi, I'm Alison", Sex.WOMAN);
             Screen screen = new Screen(6.7, "OLED");
             MobilePhone samsungPhone = new MobilePhone(battery, screen, "Fold 3");
             samsungPhone.setUnlockMethod("Fingerprint");
 
             Battery battery2 = new Battery(3500, "Apple");
-            Person scott = new Person(SCOTT_NAME, "Hi, I'm Scott");
+            Person scott = new Person(SCOTT_NAME, "Hi, I'm Scott", Sex.MAN);
             Screen screen2 = new Screen(6.2, "IPS");
             MobilePhone applePhone = new MobilePhone(battery2, screen2, "13 Pro Max");
             applePhone.setUnlockMethod("Face ID");
             LandlinePhone homePhone = new LandlinePhone(battery2, screen, "Samsung F535");
 
             Battery battery3 = new Battery(5000, "Xiaomi");
-            Person stiles = new Person(STILES_NAME, "Hi, I'm Stiles");
+            Person stiles = new Person(STILES_NAME, "Hi, I'm Stiles", Sex.MAN);
             Screen screen3 = new Screen(5.9, "IPS");
             MobilePhone xiaomiPhone = new MobilePhone(battery3, screen3, "Mi 11 Lite");
             xiaomiPhone.setUnlockMethod("PIN code");
@@ -123,6 +125,14 @@ public class Main {
                     .collect(Collectors.toList());
             FileUtils.writeLines(new File("src/main/resources/count.txt"), lst);
             LOGGER.info("The file 'count.txt' with the numbers of the unique words was created");
+
+            ArrayList<PhoneBrands> stilesPhoneTaste = new ArrayList<>();
+            stilesPhoneTaste.add(PhoneBrands.APPLE);
+            stilesPhoneTaste.add(PhoneBrands.SAMSUNG);
+            Shopper stilesShopper = new Shopper(stilesPhoneTaste);
+            stilesShopper.recommendPhoneBrand(stilesShopper);
+            stilesShopper.printBookTaste(stilesPhoneTaste);
+            stilesShopper.recommendActivity();
         } catch (BatteryCapacityException | ScreenDiagonalException | BodyCharacteristicsException e) {
             LOGGER.error(e.getMessage());
         } catch (Exception ex) {
@@ -132,15 +142,29 @@ public class Main {
 
 }
 /*
-Lab 7.1
-Read text.txt from the file and calculate the numbers of the unique words.
-Write the result to the file.
-The main requirement is: using StringUtils and FileUtils to implement it with minimum lines of code.
-
 Lab 7.2
 1. создать три Enums
 2. создать 3 кастомных Functional Interfaces
 3. https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html
 
+
+Intermediate Operations :
+map(), filter(), distinct(), sorted(), limit(), skip()
+Terminal Operations :
+forEach(), toArray(), reduce(), collect(), min(), max(), count(), anyMatch(), allMatch(), noneMatch(), findFirst(), findAny()
+
 Lab 8
++ кастомный LinedList
++ .replaceAll("[^\\da-zA-Zа-яёА-ЯЁ ]", "")
++ The settings element in the settings.xml file contains elements used to define values which configure Maven execution in various ways, like the pom.xml, but should not be bundled to any specific project, or distributed to an audience. These include values such as the local repository location, alternate remote repository servers, and authentication information.
+
+There are two locations where a settings.xml file may live:
+The Maven install: ${maven.home}/conf/settings.xml
+A user's install: ${user.home}/.m2/settings.xml
+
+git reset HEAD
+Create 2 Threads using Runnable and Thread.
+Create Connection Pool. Use collection from java.util.concurrent package. Connection class may be mocked. The pool should be threadsafe and lazy initialized.
+Initialize pool with 5 sizes. Load Connection Pool using threads and Thread Pool(7 threads). 5 threads should be able to get the connection. 2 Threads should wait for the next available connection. The program should wait as well.
+Implement 4th part but with IFuture and CompletableStage.
 * */
