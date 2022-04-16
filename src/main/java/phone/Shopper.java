@@ -40,7 +40,7 @@ public class Shopper extends Person {
     }
 
     public void printBookTaste(ArrayList<PhoneBrands> myArray) {
-        myArray.stream().forEach(taste -> LOGGER.info(taste));
+        myArray.stream().forEach(LOGGER::info);
     }
 
     public void recommendActivity() {
