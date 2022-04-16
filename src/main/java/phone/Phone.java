@@ -23,7 +23,6 @@ public abstract class Phone {
         this.battery = battery;
         this.screen = screen;
         this.model = model;
-        this.message = "Empty message";
         count++;
     }
 
@@ -68,7 +67,8 @@ public abstract class Phone {
         if (this == o) return true;
         if (!(o instanceof Phone)) return false;
         Phone phone = (Phone) o;
-        return Objects.equals(battery, phone.battery) && Objects.equals(screen, phone.screen) && Objects.equals(model, phone.model) && Objects.equals(message, phone.message);
+        return Objects.equals(battery, phone.battery) && Objects.equals(screen, phone.screen)
+                && Objects.equals(model, phone.model) && Objects.equals(message, phone.message);
     }
 
     @Override
