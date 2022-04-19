@@ -4,7 +4,7 @@ public enum PhoneBrands {
     APPLE("Apple"), SAMSUNG("Samsung"),
     XIAOMI("Xiaomi"), HUAWEI("Huawei"), OTHER("Other");
 
-    private String brand;
+    private final String brand;
 
     PhoneBrands(String brand) {
         this.brand = brand;
