@@ -1,5 +1,5 @@
 package main.java.enums;
 
 public enum Sex {
-    MAN, WOMAN, UNDEFINE
+    MAN, WOMAN, UNDEFINE;
 }
