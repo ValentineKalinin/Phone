@@ -6,7 +6,7 @@ public enum Days {
     FRIDAY("Friday"), SATURDAY("Saturday"),
     SUNDAY("Sunday");
 
-    private String day;
+    private final String day;
 
     Days(String day) {
         this.day = day;
