@@ -1,11 +1,14 @@
 package main.java.phone;
 
+import main.java.interfaces.IPrintName;
 import main.java.interfaces.IShortMessageService;
 import main.java.interfaces.IWorkable;
+
 import static main.java.phone.Main.LOGGER;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.IntPredicate;
 
 public class MobilePhone extends Phone implements IShortMessageService, IWorkable {
     private String unlockMethod;
@@ -59,12 +62,14 @@ public class MobilePhone extends Phone implements IShortMessageService, IWorkabl
 
     @Override
     public void makeCall(Person from, Person to) {
-        LOGGER.info(from.getPersonName() + " call to " + to.getPersonName() + " by landline phone");
+        IPrintName printName = (fPerson, sPerson) -> LOGGER.info(fPerson + " call to " + sPerson + " by " + phoneModel);
+        printName.print(from.getPersonName(), to.getPersonName());
     }
 
     @Override
     public void SendMessage(Person from, Person to, String mes) {
-        LOGGER.info(from.getPersonName() + " send message \"" + mes + "\" to " + to.getPersonName());
+        IPrintName printName = (fPerson, sPerson) -> LOGGER.info(fPerson + " send message \"" + mes + "\" to " + sPerson + " by " + phoneModel);
+        printName.print(from.getPersonName(), to.getPersonName());
     }
 
     @Override

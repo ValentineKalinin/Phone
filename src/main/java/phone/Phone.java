@@ -1,5 +1,7 @@
 package main.java.phone;
 
+import main.java.interfaces.IPrintName;
+
 import java.util.Date;
 import java.util.Objects;
 import static main.java.phone.Main.LOGGER;

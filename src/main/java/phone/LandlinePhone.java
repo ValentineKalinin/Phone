@@ -1,5 +1,6 @@
 package main.java.phone;
 
+import main.java.interfaces.IPrintName;
 import main.java.interfaces.IWorkable;
 import static main.java.phone.Main.LOGGER;
 
@@ -27,7 +28,8 @@ public class LandlinePhone extends Phone implements IWorkable {
 
     @Override
     public void makeCall(Person from, Person to) {
-        LOGGER.info(from.getPersonName() + " call to landline of " + to.getPersonName());
+        IPrintName printName = (sc, al) -> LOGGER.info(sc + " call to " + al);
+        printName.print(from.getPersonName(), to.getPersonName());
     }
 
     @Override
