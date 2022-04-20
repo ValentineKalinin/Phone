@@ -1,11 +1,14 @@
-package main.java.phone;
+package phone;
 
-import main.java.interfaces.IFax;
-import main.java.interfaces.IPrintName;
-import main.java.interfaces.IWorkable;
-import static main.java.phone.Main.LOGGER;
+import interfaces.IFax;
+import interfaces.IPrintName;
+import interfaces.IWorkable;
+import java.util.Objects;
+import static phone.Main.LOGGER;
 
 public class Telefax extends Phone implements IFax, IWorkable {
+    private String roomLocated;
+
     public Telefax() {
     }
 
@@ -13,6 +16,39 @@ public class Telefax extends Phone implements IFax, IWorkable {
         super(battery, screen, model);
     }
 
+    public Telefax(Battery battery, Screen screen, String model, String room) {
+        super(battery, screen, model);
+        this.roomLocated = room;
+    }
+
+    public String getRoomLocated() {
+        return roomLocated;
+    }
+
+    public void setRoomLocated(String roomLocated) {
+        this.roomLocated = roomLocated;
+    }
+
+    @Override
+    public String toString() {
+        return "Telefax{" +
+                "roomLocated='" + roomLocated + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Telefax)) return false;
+        if (!super.equals(o)) return false;
+        Telefax telefax = (Telefax) o;
+        return Objects.equals(roomLocated, telefax.roomLocated);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), roomLocated);
+    }
 
     @Override
     public void makeCall(Person from, Person to) {
@@ -29,5 +65,11 @@ public class Telefax extends Phone implements IFax, IWorkable {
     @Override
     public void workable() {
         LOGGER.info(getModel() + " is work!");
+    }
+
+    public void betterToCabinet() {
+        if (!roomLocated.equals("Cabinet"))
+            LOGGER.info("Please, put your fax to your cabinet");
+        else LOGGER.info("Location of your fax is perfect");
     }
 }

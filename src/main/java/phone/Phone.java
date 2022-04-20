@@ -1,11 +1,8 @@
-package main.java.phone;
-
-import main.java.interfaces.IPrintName;
+package phone;
 
 import java.util.Date;
 import java.util.Objects;
-import static main.java.phone.Main.LOGGER;
-
+import static phone.Main.LOGGER;
 
 public abstract class Phone {
     private Battery battery;

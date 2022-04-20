@@ -1,6 +1,6 @@
-package main.java.enums;
+package enums;
 
-enum Store {
+public enum Store {
     STORE_CENTRE("Vera Khoruzhey 2"),
     STORE_WEST("Pobediteley 86"),
     MAIN_OFFICE("Hemiga 1");

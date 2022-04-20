@@ -1,14 +1,12 @@
-package main.java.phone;
+package phone;
 
-import main.java.interfaces.IPrintName;
-import main.java.interfaces.IShortMessageService;
-import main.java.interfaces.IWorkable;
-
-import static main.java.phone.Main.LOGGER;
+import interfaces.IPrintName;
+import interfaces.IShortMessageService;
+import interfaces.IWorkable;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.function.IntPredicate;
+import static phone.Main.LOGGER;
 
 public class MobilePhone extends Phone implements IShortMessageService, IWorkable {
     private String unlockMethod;

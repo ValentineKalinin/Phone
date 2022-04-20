@@ -1,9 +1,9 @@
-package main.java.phone;
+package phone;
 
-import main.java.enums.Sex;
-import main.java.exceptions.BodyCharacteristicsException;
+import enums.Sex;
+import exceptions.BodyCharacteristicsException;
 import java.util.Objects;
-import static main.java.phone.Main.LOGGER;
+import static phone.Main.LOGGER;
 
 public class Person {
     private String personName;

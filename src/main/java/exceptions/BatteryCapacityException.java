@@ -1,6 +1,6 @@
-package main.java.exceptions;
+package exceptions;
 
-public class BatteryCapacityException extends Exception{
+public class BatteryCapacityException extends Exception {
     public BatteryCapacityException() {
     }
 

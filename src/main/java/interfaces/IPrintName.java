@@ -1,4 +1,4 @@
-package main.java.interfaces;
+package interfaces;
 
 @FunctionalInterface
 public interface IPrintName {

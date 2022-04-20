@@ -1,12 +1,13 @@
-package main.java.phone;
+package phone;
 
-import main.java.interfaces.IPrintName;
-import main.java.interfaces.IWorkable;
-import static main.java.phone.Main.LOGGER;
+import interfaces.IPrintName;
+import interfaces.IWorkable;
+import java.util.Objects;
+import static phone.Main.LOGGER;
 
 public class LandlinePhone extends Phone implements IWorkable {
     static final String operator = "BelTelecom";
-    private final Cable cable = new Cable("Cable", 5);
+    private Cable cablePhone;
 
     public LandlinePhone() {
     }
@@ -15,15 +16,42 @@ public class LandlinePhone extends Phone implements IWorkable {
         super(battery, screen, model);
     }
 
+    public LandlinePhone(Battery battery, Screen screen, String model, Cable cable) {
+        super(battery, screen, model);
+        this.cablePhone = cable;
+    }
+
     public String getOperator() {
         return operator;
+    }
+
+    public Cable getCablePhone() {
+        return cablePhone;
+    }
+
+    public void setCablePhone(Cable cablePhone) {
+        this.cablePhone = cablePhone;
     }
 
     @Override
     public String toString() {
         return "LandlinePhone{" +
-                "cable = " + cable +
+                "cablePhone=" + cablePhone +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LandlinePhone)) return false;
+        if (!super.equals(o)) return false;
+        LandlinePhone that = (LandlinePhone) o;
+        return Objects.equals(cablePhone, that.cablePhone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), cablePhone);
     }
 
     @Override
@@ -35,5 +63,13 @@ public class LandlinePhone extends Phone implements IWorkable {
     @Override
     public void workable() {
         System.out.println(getModel() + " is work!");
+    }
+
+    public String isCableTooLong() {
+        if (cablePhone.getCableLength() >= 2)
+            return "Cable is long";
+        else if (cablePhone.getCableLength() <= 0)
+            return "Error, long is less zero";
+        else return "Cable is short";
     }
 }

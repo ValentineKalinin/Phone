@@ -1,6 +1,7 @@
-package main.java.enums;
+package enums;
 
-import static main.java.phone.Main.LOGGER;
+import enums.Store;
+import static phone.Main.LOGGER;
 
 public enum ShopWorkTime {
     FULL_TIME_WORK {

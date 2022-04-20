@@ -1,23 +1,23 @@
-package main.java.phone;
+package phone;
 
 import java.util.Objects;
 
 public class Cable {
-    private String cable;
+    private String oneCable;
     private int cableLength;
 
     public Cable() {
     }
 
     public Cable(String cable, int cableLength) {
-        this.cable = cable;
+        this.oneCable = cable;
         this.cableLength = cableLength;
     }
 
     @Override
     public String toString() {
         return "Cable{" +
-                "cable = '" + cable + '\'' +
+                "cable = '" + oneCable + '\'' +
                 ", cableLength = " + cableLength +
                 '}';
     }
@@ -27,24 +27,24 @@ public class Cable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cable cable1 = (Cable) o;
-        return cableLength == cable1.cableLength && Objects.equals(cable, cable1.cable);
+        return cableLength == cable1.cableLength && Objects.equals(oneCable, cable1.oneCable);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cable, cableLength);
+        return Objects.hash(oneCable, cableLength);
     }
 
     public int getCableLength() {
         return cableLength;
     }
 
-    public void setCable(String cable) {
-        this.cable = cable;
+    public void setOneCable(String oneCable) {
+        this.oneCable = oneCable;
     }
 
-    public String getCable() {
-        return cable;
+    public String getOneCable() {
+        return oneCable;
     }
 
     public void setCableLength(int cableLength) {

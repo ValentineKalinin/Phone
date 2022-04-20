@@ -1,6 +1,7 @@
-package main.java.phone;
+package phone;
 
-import main.java.exceptions.BatteryCapacityException;
+import exceptions.BatteryCapacityException;
+import java.util.Objects;
 
 public class Battery {
     private int capacity;
@@ -23,6 +24,19 @@ public class Battery {
             throw new BatteryCapacityException("Capacity of Battery is incorrect");
         }
         this.capacity = capacity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Battery)) return false;
+        Battery battery = (Battery) o;
+        return capacity == battery.capacity && Objects.equals(brand, battery.brand);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(capacity, brand);
     }
 
     public String getBrand() {

@@ -1,6 +1,6 @@
-package main.java.interfaces;
+package interfaces;
 
-import main.java.phone.Person;
+import phone.Person;
 
 public interface IFax {
     void SendFax(Person from, Person to, String fax);

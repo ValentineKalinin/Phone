@@ -1,6 +1,6 @@
-package main.java.interfaces;
+package interfaces;
 
-import main.java.phone.Person;
+import phone.Person;
 
 public interface IShortMessageService {
     void SendMessage(Person from, Person to, String mes);

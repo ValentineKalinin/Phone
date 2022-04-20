@@ -1,22 +1,24 @@
-package main.java.phone;
+package phone;
 
-import main.java.enums.Course;
-import main.java.enums.Days;
-import main.java.enums.PhoneBrands;
+import enums.PhoneBrands;
+import enums.Days;
+import enums.ShopWorkTime;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-import static main.java.phone.Main.LOGGER;
-
+import static phone.Main.LOGGER;
+// добавить интерфейсф
+// dобавить лямбды
 public class Shopper extends Person {
-    private ArrayList<PhoneBrands> phoneTaste = new ArrayList<>();
+    private List<PhoneBrands> phoneTaste = new ArrayList<>();
 
     public Shopper() {
 
     }
 
-    public Shopper(ArrayList<PhoneBrands> phoneTaste) {
+    public Shopper(List<PhoneBrands> phoneTaste) {
         this.phoneTaste = phoneTaste;
     }
 
@@ -28,10 +30,10 @@ public class Shopper extends Person {
     }
 
     public ArrayList<PhoneBrands> getPhoneTaste() {
-        return phoneTaste;
+        return (ArrayList<PhoneBrands>) phoneTaste;
     }
 
-    public void setPhoneTaste(ArrayList<PhoneBrands> phoneTaste) {
+    public void setPhoneTaste(List<PhoneBrands> phoneTaste) {
         this.phoneTaste = phoneTaste;
     }
 
@@ -39,8 +41,8 @@ public class Shopper extends Person {
         phoneTaste.add(t);
     }
 
-    public void printBookTaste(ArrayList<PhoneBrands> myArray) {
-        myArray.stream().forEach(LOGGER::info);
+    public void printBookTaste(List<PhoneBrands> myArray) {
+        myArray.forEach(LOGGER::info);
     }
 
     public void recommendActivity() {
@@ -51,24 +53,24 @@ public class Shopper extends Person {
         switch (d) {
             case MONDAY:
             case TUESDAY:
-                Course.MORNING_WORKING.info();
+                ShopWorkTime.MORNING_WORKING.info();
                 break;
             case WEDNESDAY:
             case THURSDAY:
             case FRIDAY:
-                Course.FULL_TIME_WORK.info();
+                ShopWorkTime.FULL_TIME_WORK.info();
                 break;
             case SATURDAY:
-                Course.EVENING_WORKING.info();
+                ShopWorkTime.EVENING_WORKING.info();
                 break;
             default:
-                LOGGER.info("You should choose an option between Monday and Saturday");
+                LOGGER.info("Sorry! Sunday is a day off");
                 break;
         }
     }
 
-    public void recommendPhoneBrand(Object shopper) {
-        ArrayList<PhoneBrands> taste = ((Shopper) shopper).getPhoneTaste();
+    public void recommendPhoneBrand(Shopper shopper) {
+        ArrayList<PhoneBrands> taste = shopper.getPhoneTaste();
         for (PhoneBrands x : taste) {
             try {
                 switch (x) {
@@ -88,6 +90,7 @@ public class Shopper extends Person {
                         LOGGER.info("Sorry, we don't have any " + x + " phone in the store");
                         break;
                 }
+                // создать эксепшен - нет такого девайса і обработать в catch
             } catch (Exception e) {
                 LOGGER.info("Sorry, we don't have any phone model you like in the store");
             }

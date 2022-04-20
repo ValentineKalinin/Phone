@@ -1,16 +1,14 @@
-package main.java.phone;
+package phone;
 
-import main.java.enums.PhoneBrands;
-import main.java.enums.Sex;
-import main.java.exceptions.BatteryCapacityException;
-import main.java.exceptions.BodyCharacteristicsException;
-import main.java.exceptions.ScreenDiagonalException;
-
+import enums.PhoneBrands;
+import enums.Sex;
+import exceptions.BatteryCapacityException;
+import exceptions.BodyCharacteristicsException;
+import exceptions.ScreenDiagonalException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -19,7 +17,11 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static final Logger LOGGER = LogManager.getLogger(Main.class);
-
+    // разобрать блок трай на маленькие
+    // разобрать по функциям чтобы можно было коменьтить
+    // незабывать про полиморфизм
+    // нормальные эксепшионс: обработать чтобы при ошибке все работало дальше
+    // выучить иерархии эксепшенов и коллекций!!! сет, лист, мар отличия
     public static void main(String[] args) throws BatteryCapacityException, ScreenDiagonalException, IOException {
         try {
             final String ALISON_NAME = "Alison";
@@ -135,9 +137,9 @@ public class Main {
             Shopper stilesShopper = new Shopper(stilesPhoneTaste);
             stilesShopper.recommendPhoneBrand(stilesShopper);
             stilesShopper.printBookTaste(stilesPhoneTaste);
-            //stilesShopper.recommendActivity();
+            stilesShopper.recommendActivity();
 
-        } catch (BatteryCapacityException | ScreenDiagonalException | BodyCharacteristicsException e) {
+        } catch (BodyCharacteristicsException e) {
             LOGGER.error(e.getMessage());
         } catch (Exception ex) {
             LOGGER.info(ex);
