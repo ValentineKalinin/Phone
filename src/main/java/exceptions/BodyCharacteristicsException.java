@@ -1,6 +1,6 @@
 package exceptions;
 
-public class BodyCharacteristicsException extends Exception{
+public class BodyCharacteristicsException extends Exception {
     public BodyCharacteristicsException() {
     }
 

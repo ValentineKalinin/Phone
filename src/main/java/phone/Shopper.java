@@ -9,8 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static phone.Main.LOGGER;
-// добавить интерфейсф
-// dобавить лямбды
+
 public class Shopper extends Person {
     private List<PhoneBrands> phoneTaste = new ArrayList<>();
 

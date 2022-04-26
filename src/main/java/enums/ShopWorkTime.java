@@ -1,6 +1,7 @@
 package enums;
 
 import enums.Store;
+
 import static phone.Main.LOGGER;
 
 public enum ShopWorkTime {
@@ -22,5 +23,6 @@ public enum ShopWorkTime {
             LOGGER.info("You can visit in the morning store at " + Store.MAIN_OFFICE.getAddress() + " or at " + Store.STORE_WEST.getAddress());
         }
     };
+
     public abstract void info();
 }
