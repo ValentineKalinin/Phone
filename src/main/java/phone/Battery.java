@@ -1,16 +1,14 @@
 package phone;
 
 import exceptions.BatteryCapacityException;
+
 import java.util.Objects;
 
 public class Battery {
     private int capacity;
     private String brand;
 
-    public Battery(int capacity, String brand) throws BatteryCapacityException {
-        if (capacity <= 0) {
-            throw new BatteryCapacityException("Capacity of Battery is incorrect");
-        }
+    public Battery(int capacity, String brand) {
         this.capacity = capacity;
         this.brand = brand;
     }
@@ -20,10 +18,10 @@ public class Battery {
     }
 
     public void setCapacity(int capacity) throws BatteryCapacityException {
-        if (capacity <= 0) {
+        if (capacity >= 0)
+            this.capacity = capacity;
+        else
             throw new BatteryCapacityException("Capacity of Battery is incorrect");
-        }
-        this.capacity = capacity;
     }
 
     @Override
