@@ -1,6 +1,6 @@
 package exceptions;
 
-public class CallOrMessageException extends Exception {
+public class CallOrMessageException extends Exception{
     public CallOrMessageException() {
     }
 
