@@ -1,9 +1,11 @@
 package phone;
 
 import exceptions.ScreenDiagonalException;
+import interfaces.service.IScreenSize;
+
 import static phone.Main.LOGGER;
 
-public class Screen {
+public class Screen implements IScreenSize {
     private double diagonalOfScreen;
     private String technologyOfScreen;
     private double horizontalPixel;
@@ -12,10 +14,7 @@ public class Screen {
     public Screen() {
     }
 
-    public Screen(double diagonalOfScreen, String technologyOfScreen) throws ScreenDiagonalException {
-        if (diagonalOfScreen <= 0) {
-            throw new ScreenDiagonalException("Diagonal of screen is incorrect");
-        }
+    public Screen(double diagonalOfScreen, String technologyOfScreen) {
         this.diagonalOfScreen = diagonalOfScreen;
         this.technologyOfScreen = technologyOfScreen;
     }
@@ -67,13 +66,15 @@ public class Screen {
         return Math.sqrt(Math.pow(horizontalPixel, 2) +
                 Math.pow(verticalPixels, 2)) / diagonalOfScreen;
     }
+
     public String ppiOfScreen(String nameOfPerson) {
         int ppi = (int) (Math.sqrt(Math.pow(horizontalPixel, 2) +
                 Math.pow(verticalPixels, 2)) / diagonalOfScreen);
         return ("Resolution of " + nameOfPerson + "'s screen: " + ppi + " pixels per inch");
     }
 
-    public void size() {
+    @Override
+    public void getScreenSize() {
         LOGGER.info("Screen size: " + horizontalPixel + " to " + verticalPixels);
     }
 }
