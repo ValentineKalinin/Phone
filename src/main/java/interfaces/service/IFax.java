@@ -1,8 +1,8 @@
 package interfaces.service;
 
-import exceptions.CallOrMessageException;
+import exceptions.MessageException;
 import phone.Person;
 
 public interface IFax {
-    void SendFax(Person from, Person to, String fax) throws CallOrMessageException;
+    void SendFax(Person from, Person to, String fax) throws MessageException;
 }

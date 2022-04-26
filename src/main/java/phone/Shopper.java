@@ -3,6 +3,7 @@ package phone;
 import enums.PhoneBrands;
 import enums.Days;
 import enums.ShopWorkTime;
+import exceptions.ChooseBrandException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,54 +45,50 @@ public class Shopper extends Person {
         myArray.forEach(LOGGER::info);
     }
 
-    public void recommendActivity() {
+    public void recommendActivity() throws IllegalArgumentException {
         LOGGER.info("What day of the week do you want to come to the store?");
-        Scanner sc = new Scanner(System.in);
-        String option = sc.nextLine();
-        Days d = Days.valueOf(option.toUpperCase());
-        switch (d) {
-            case MONDAY:
-            case TUESDAY:
-                ShopWorkTime.MORNING_WORKING.info();
-                break;
-            case WEDNESDAY:
-            case THURSDAY:
-            case FRIDAY:
-                ShopWorkTime.FULL_TIME_WORK.info();
-                break;
-            case SATURDAY:
-                ShopWorkTime.EVENING_WORKING.info();
-                break;
-            default:
-                LOGGER.info("Sorry! Sunday is a day off");
-                break;
+        try (Scanner sc = new Scanner(System.in)) {
+            String option = sc.nextLine();
+            Days d = Days.valueOf(option.toUpperCase());
+            switch (d) {
+                case MONDAY:
+                case TUESDAY:
+                    ShopWorkTime.MORNING_WORKING.info();
+                    break;
+                case WEDNESDAY:
+                case THURSDAY:
+                case FRIDAY:
+                    ShopWorkTime.FULL_TIME_WORK.info();
+                    break;
+                case SATURDAY:
+                    ShopWorkTime.EVENING_WORKING.info();
+                    break;
+                case SUNDAY:
+                    LOGGER.info("Sorry! Sunday is a day off");
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unexpected enum value: {Day of the week}, not " + d);
+            }
         }
     }
 
-    public void recommendPhoneBrand(Shopper shopper) {
-        ArrayList<PhoneBrands> taste = shopper.getPhoneTaste();
-        for (PhoneBrands x : taste) {
-            try {
-                switch (x) {
-                    case APPLE:
-                        LOGGER.info("If you like Apple you can buy iPhone 12 Pro Max");
-                        break;
-                    case SAMSUNG:
-                        LOGGER.info("If you like Samsung you can buy Samsung Galaxy S21+");
-                        break;
-                    case XIAOMI:
-                        LOGGER.info("If you like Xiaomi you can buy Mi Note 11");
-                        break;
-                    case HUAWEI:
-                        LOGGER.info("If you like Huawei you can buy Huawei Mate 20 Pro");
-                        break;
-                    default:
-                        LOGGER.info("Sorry, we don't have any " + x + " phone in the store");
-                        break;
-                }
-                // создать эксепшен - нет такого девайса і обработать в catch
-            } catch (Exception e) {
-                LOGGER.info("Sorry, we don't have any phone model you like in the store");
+    public void recommendPhoneBrand() throws ChooseBrandException {
+        for (PhoneBrands x : phoneTaste) {
+            switch (x) {
+                case APPLE:
+                    LOGGER.info("If you like Apple you can buy iPhone 12 Pro Max");
+                    break;
+                case SAMSUNG:
+                    LOGGER.info("If you like Samsung you can buy Samsung Galaxy S21+");
+                    break;
+                case XIAOMI:
+                    LOGGER.info("If you like Xiaomi you can buy Mi Note 11");
+                    break;
+                case HUAWEI:
+                    LOGGER.info("If you like Huawei you can buy Huawei Mate 20 Pro");
+                    break;
+                default:
+                    throw new ChooseBrandException("Sorry, we don't have any " + x + " phone in the store");
             }
         }
     }

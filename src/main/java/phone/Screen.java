@@ -56,21 +56,16 @@ public class Screen implements IScreenSize {
                 '}';
     }
 
-    public String workTime(String nameOfPerson, int capacityOfBattery) {
+    public void workTime(String nameOfPerson, int capacityOfBattery) {
         int screenBrightness = (int) (Math.random() * 100);
-        return ("Work time of " + nameOfPerson + "'s screen on " + screenBrightness + "% brightness: " +
+        LOGGER.info("Work time of " + nameOfPerson + "'s screen on " + screenBrightness + "% brightness: " +
                 (screenBrightness * 500 / capacityOfBattery) + " hours");
     }
 
-    public double ppiOfScreen() {
-        return Math.sqrt(Math.pow(horizontalPixel, 2) +
-                Math.pow(verticalPixels, 2)) / diagonalOfScreen;
-    }
-
-    public String ppiOfScreen(String nameOfPerson) {
+    public void ppiOfScreen(String nameOfPerson) {
         int ppi = (int) (Math.sqrt(Math.pow(horizontalPixel, 2) +
                 Math.pow(verticalPixels, 2)) / diagonalOfScreen);
-        return ("Resolution of " + nameOfPerson + "'s screen: " + ppi + " pixels per inch");
+        LOGGER.info("Resolution of " + nameOfPerson + "'s screen: " + ppi + " pixels per inch");
     }
 
     @Override

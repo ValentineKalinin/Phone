@@ -1,11 +1,11 @@
 package phone;
 
-import exceptions.CallOrMessageException;
+import exceptions.CallException;
+import exceptions.MessageException;
 import interfaces.service.IPrintName;
 import interfaces.service.IShortMessageService;
 import interfaces.service.IWorkable;
 
-import java.util.List;
 import java.util.Objects;
 
 import static phone.Main.LOGGER;
@@ -61,21 +61,21 @@ public class MobilePhone extends Phone implements IShortMessageService, IWorkabl
     }
 
     @Override
-    public void makeCall(Person from, Person to) throws CallOrMessageException {
+    public void makeCall(Person from, Person to) throws CallException {
         if (!from.equals(to)) {
             IPrintName printName = (fPerson, sPerson) -> LOGGER.info(fPerson + " call to " + sPerson + " by " + phoneModel);
             printName.print(from.getPersonName(), to.getPersonName());
         } else
-            throw new CallOrMessageException("You can't make call from " + from.getPersonName() + " to " + to.getPersonName());
+            throw new CallException("You can't make call from " + from.getPersonName() + " to " + to.getPersonName());
     }
 
     @Override
-    public void SendMessage(Person from, Person to, String mes) throws CallOrMessageException {
+    public void SendMessage(Person from, Person to, String mes) throws MessageException {
         if (!from.equals(to)) {
             IPrintName printName = (fPerson, sPerson) -> LOGGER.info(fPerson + " send message \"" + mes + "\" to " + sPerson + " by " + phoneModel);
             printName.print(from.getPersonName(), to.getPersonName());
         } else
-            throw new CallOrMessageException("You can't send message from " + from.getPersonName() + " to " + to.getPersonName());
+            throw new MessageException("You can't send message from " + from.getPersonName() + " to " + to.getPersonName());
     }
 
     @Override

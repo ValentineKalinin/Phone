@@ -1,6 +1,7 @@
 package phone;
 
-import exceptions.CallOrMessageException;
+import exceptions.CallException;
+import exceptions.MessageException;
 import interfaces.service.IFax;
 import interfaces.service.IPrintName;
 import interfaces.service.IWorkable;
@@ -54,21 +55,21 @@ public class Telefax extends Phone implements IFax, IWorkable {
     }
 
     @Override
-    public void makeCall(Person from, Person to) throws CallOrMessageException {
+    public void makeCall(Person from, Person to) throws CallException {
         if (!from.equals(to)) {
             IPrintName printName = (sc, al) -> LOGGER.info(sc + " call to " + al);
             LOGGER.info("Can't make call from " + getModel());
         } else
-            throw new CallOrMessageException("You can't make call from " + from.getPersonName() + " to " + to.getPersonName());
+            throw new CallException("You can't make call from " + from.getPersonName() + " to " + to.getPersonName());
     }
 
     @Override
-    public void SendFax(Person from, Person to, String fax) throws CallOrMessageException {
+    public void SendFax(Person from, Person to, String fax) throws MessageException {
         if (!from.equals(to)) {
             IPrintName printName = (fPerson, sPerson) -> LOGGER.info(sPerson + " get fax \"" + fax + "\" from " + fPerson + " be fax");
             printName.print(from.getPersonName(), to.getPersonName());
         } else
-            throw new CallOrMessageException("You can't send message from " + from.getPersonName() + " to " + to.getPersonName());
+            throw new MessageException("You can't send message from " + from.getPersonName() + " to " + to.getPersonName());
     }
 
     @Override

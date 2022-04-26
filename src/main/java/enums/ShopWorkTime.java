@@ -1,7 +1,5 @@
 package enums;
 
-import enums.Store;
-
 import static phone.Main.LOGGER;
 
 public enum ShopWorkTime {

@@ -2,9 +2,7 @@ package phone;
 
 import enums.PhoneBrands;
 import enums.Sex;
-import exceptions.BodyCharacteristicsException;
-import exceptions.CallOrMessageException;
-import exceptions.ScreenDiagonalException;
+import exceptions.*;
 import interfaces.functional.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -29,7 +27,7 @@ public class Main {
 
     Battery batterySamsung = new Battery(4000, "Samsung");
     Battery batteryApple = new Battery(3500, "Apple");
-    Battery batteryXiaomi = new Battery(-5000, "Xiaomi");
+    Battery batteryXiaomi = new Battery();
     Battery batterFax = new Battery(550, "Li-ion");
 
     Person alison = new Person(ALISON_NAME, "Hi, I'm Alison", Sex.WOMAN);
@@ -48,35 +46,46 @@ public class Main {
     Telefax telefax = new Telefax(batterFax, screenFax, "HP Pavilion");
 
     private void runBasicClass() throws ScreenDiagonalException {
+        try {
+            batteryXiaomi.setCapacity(5000);
+        } catch (BatteryCapacityException e) {
+            LOGGER.error(e.getMessage());
+        }
+        batteryXiaomi.setBrand("Xiaomi");
         samsungPhone.setUnlockMethod("Fingerprint");
         applePhone.setUnlockMethod("Face ID");
         xiaomiPhone.setUnlockMethod("PIN code");
+        screenApple.ppiOfScreen(scott.getPersonName());
+        batteryXiaomi.workTime(alison.getPersonName());
+        screenSamsung.workTime(alison.getPersonName(), batterySamsung.getCapacity());
 
-        LOGGER.info("Enter username and password for computer.Macbook");
-        LOGGER.info(screenApple.ppiOfScreen(scott.getPersonName()));
-        LOGGER.info(samsungPhone.getModel());
-        LOGGER.info(applePhone.getBattery());
         LOGGER.info(xiaomiPhone.getBattery());
-        LOGGER.info(batteryXiaomi.workTime(alison.getPersonName()));
-        LOGGER.info(screenSamsung.workTime(alison.getPersonName(), batterySamsung.getCapacity()));
-
         LOGGER.info("Model at Apple: " + applePhone.getModel());
         LOGGER.info(applePhone.getModel() + " unlock by " + applePhone.getUnlockMethod());
         LOGGER.info("Screen at " + samsungPhone.getModel() + ": " + samsungPhone.getScreen());
-
-        LOGGER.info(batterySamsung.deterioration(alison.getPersonName(), batterySamsung.getCapacity()));
-        LOGGER.info(batterySamsung.workTime(alison.getPersonName()));
+        batterySamsung.deterioration(alison.getPersonName(), batterySamsung.getCapacity());
+        batterySamsung.workTime(alison.getPersonName());
 
         try {
             samsungPhone.makeCall(scott, alison);
-            telefax.makeCall(scott, alison);
-            applePhone.SendMessage(alison, scott, alison.getMessage());
-            telefax.SendFax(scott, alison, scott.getMessage());
-        } catch (CallOrMessageException e) {
-            LOGGER.error(e.getMessage(), e);
+        } catch (CallException e) {
+            LOGGER.error(e.getMessage());
         }
-
-
+        try {
+            telefax.makeCall(scott, alison);
+        } catch (CallException e) {
+            LOGGER.error(e.getMessage());
+        }
+        try {
+            applePhone.SendMessage(alison, scott, alison.getMessage());
+        } catch (MessageException e) {
+            LOGGER.error(e.getMessage());
+        }
+        try {
+            telefax.SendFax(scott, alison, scott.getMessage());
+        } catch (MessageException e) {
+            LOGGER.error(e.getMessage());
+        }
         samsungPhone.workable();
         telefax.workable();
         homePhone.workable();
@@ -99,9 +108,17 @@ public class Main {
         stilesPhoneTaste.add(PhoneBrands.APPLE);
         stilesPhoneTaste.add(PhoneBrands.SAMSUNG);
         Shopper stilesShopper = new Shopper(stilesPhoneTaste);
-        stilesShopper.recommendPhoneBrand(stilesShopper);
+        try {
+            stilesShopper.recommendPhoneBrand();
+        } catch (ChooseBrandException e) {
+            LOGGER.error(e.getMessage());
+        }
         stilesShopper.printBookTaste(stilesPhoneTaste);
-        stilesShopper.recommendActivity();
+        try {
+            stilesShopper.recommendActivity();
+        } catch (IllegalArgumentException e) {
+            LOGGER.error(e.getMessage());
+        }
     }
 
     private void runCollections() {
@@ -132,17 +149,17 @@ public class Main {
         LOGGER.info(personMap.get("2").toString());
     }
 
-    final Random random = new Random();
+    private final Random random = new Random();
     private static final int BOUND = 10;
     private static final String SAMSUNG = "Samsung ";
-    private static final String SAMMES = "Hi i'm ";
+    private static final String SAMSUNG_MESSAGE = "Hi i'm ";
     private static final String UNLOCK = "Unlock by: ";
     private static final int COUNT_OF_SAMSUNG = 10;
 
     public List<MobilePhone> createPhoneList() {
         List<MobilePhone> order = new LinkedList<>();
         IntStream.range(0, COUNT_OF_SAMSUNG).mapToObj(i -> new MobilePhone()).forEach(phone -> {
-            phone.setMessage(SAMMES + random.nextInt(BOUND));
+            phone.setMessage(SAMSUNG_MESSAGE + random.nextInt(BOUND));
             phone.setPhoneModel(SAMSUNG + random.nextInt(BOUND));
             phone.setUnlockMethod(UNLOCK + random.nextInt(BOUND));
             order.add(phone);
@@ -220,8 +237,6 @@ public class Main {
 }
 /*
 mvn exec:java -Dexec.mainClass="phone.Main"
-
-нормальные эксепшионс: обработать чтобы при ошибке все работало дальше
 
 Lab 8
 1. add 5 interfaces and lambda function for them

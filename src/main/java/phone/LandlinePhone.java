@@ -1,6 +1,6 @@
 package phone;
 
-import exceptions.CallOrMessageException;
+import exceptions.CallException;
 import interfaces.service.IPrintName;
 import interfaces.service.IWorkable;
 
@@ -58,12 +58,12 @@ public class LandlinePhone extends Phone implements IWorkable {
     }
 
     @Override
-    public void makeCall(Person from, Person to) throws CallOrMessageException {
+    public void makeCall(Person from, Person to) throws CallException {
         if (!from.equals(to)) {
             IPrintName printName = (sc, al) -> LOGGER.info(sc + " call to " + al);
             printName.print(from.getPersonName(), to.getPersonName());
         } else
-            throw new CallOrMessageException("You can't make call from " + from.getPersonName() + " to " + to.getPersonName());
+            throw new CallException("You can't make call from " + from.getPersonName() + " to " + to.getPersonName());
     }
 
     @Override
@@ -71,11 +71,11 @@ public class LandlinePhone extends Phone implements IWorkable {
         System.out.println(getModel() + " is work!");
     }
 
-    public String isCableTooLong() {
+    public void isCableTooLong() {
         if (cablePhone.getCableLength() >= 2)
-            return "Cable is long";
+            LOGGER.info("Cable is long");
         else if (cablePhone.getCableLength() <= 0)
-            return "Error, long is less zero";
-        else return "Cable is short";
+            LOGGER.info("Error, long is less zero");
+        else LOGGER.info("Cable is short");
     }
 }

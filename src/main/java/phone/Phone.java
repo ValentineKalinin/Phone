@@ -1,6 +1,6 @@
 package phone;
 
-import exceptions.CallOrMessageException;
+import exceptions.CallException;
 
 import java.util.Date;
 import java.util.List;
@@ -89,7 +89,7 @@ public abstract class Phone {
                 '}';
     }
 
-    public abstract void makeCall(Person from, Person to) throws CallOrMessageException;
+    public abstract void makeCall(Person from, Person to) throws CallException;
 
     public static void finalCurrentTime() {
         Date date = new Date();

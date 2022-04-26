@@ -4,9 +4,15 @@ import exceptions.BatteryCapacityException;
 
 import java.util.Objects;
 
+import static phone.Main.LOGGER;
+
 public class Battery {
     private int capacity;
     private String brand;
+
+    public Battery() {
+
+    }
 
     public Battery(int capacity, String brand) {
         this.capacity = capacity;
@@ -53,14 +59,14 @@ public class Battery {
                 '}';
     }
 
-    public String deterioration(String nameOfPerson, int capacityOfBattery) {
+    public void deterioration(String nameOfPerson, int capacityOfBattery) {
         double percent = (Math.random() * 500);
-        return ("Deterioration of " + nameOfPerson + "'s battery: " +
+        LOGGER.info("Deterioration of " + nameOfPerson + "'s battery: " +
                 (int) ((capacityOfBattery - percent) / capacityOfBattery * 100) + "%");
     }
 
-    public String workTime(String nameOfPerson) {
-        return ("Work time of " + nameOfPerson + "'s phone battery with watching Youtube: " +
+    public void workTime(String nameOfPerson) {
+        LOGGER.info("Work time of " + nameOfPerson + "'s phone battery with watching Youtube: " +
                 this.capacity / 500 + " hours");
     }
 }
