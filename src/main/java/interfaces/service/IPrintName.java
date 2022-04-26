@@ -1,4 +1,4 @@
-package interfaces;
+package interfaces.service;
 
 @FunctionalInterface
 public interface IPrintName {
