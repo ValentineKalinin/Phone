@@ -1,8 +1,11 @@
 package phone;
 
-import interfaces.IPrintName;
-import interfaces.IWorkable;
+import exceptions.CallOrMessageException;
+import interfaces.service.IPrintName;
+import interfaces.service.IWorkable;
+
 import java.util.Objects;
+
 import static phone.Main.LOGGER;
 
 public class LandlinePhone extends Phone implements IWorkable {
@@ -21,7 +24,7 @@ public class LandlinePhone extends Phone implements IWorkable {
         this.cablePhone = cable;
     }
 
-    public String getOperator() {
+    public static String getOperator() {
         return operator;
     }
 
@@ -55,9 +58,12 @@ public class LandlinePhone extends Phone implements IWorkable {
     }
 
     @Override
-    public void makeCall(Person from, Person to) {
-        IPrintName printName = (sc, al) -> LOGGER.info(sc + " call to " + al);
-        printName.print(from.getPersonName(), to.getPersonName());
+    public void makeCall(Person from, Person to) throws CallOrMessageException {
+        if (!from.equals(to)) {
+            IPrintName printName = (sc, al) -> LOGGER.info(sc + " call to " + al);
+            printName.print(from.getPersonName(), to.getPersonName());
+        } else
+            throw new CallOrMessageException("You can't make call from " + from.getPersonName() + " to " + to.getPersonName());
     }
 
     @Override

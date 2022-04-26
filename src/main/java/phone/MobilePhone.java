@@ -1,11 +1,13 @@
 package phone;
 
-import interfaces.IPrintName;
-import interfaces.IShortMessageService;
-import interfaces.IWorkable;
+import exceptions.CallOrMessageException;
+import interfaces.service.IPrintName;
+import interfaces.service.IShortMessageService;
+import interfaces.service.IWorkable;
 
 import java.util.List;
 import java.util.Objects;
+
 import static phone.Main.LOGGER;
 
 public class MobilePhone extends Phone implements IShortMessageService, IWorkable {
@@ -59,25 +61,25 @@ public class MobilePhone extends Phone implements IShortMessageService, IWorkabl
     }
 
     @Override
-    public void makeCall(Person from, Person to) {
-        IPrintName printName = (fPerson, sPerson) -> LOGGER.info(fPerson + " call to " + sPerson + " by " + phoneModel);
-        printName.print(from.getPersonName(), to.getPersonName());
+    public void makeCall(Person from, Person to) throws CallOrMessageException {
+        if (!from.equals(to)) {
+            IPrintName printName = (fPerson, sPerson) -> LOGGER.info(fPerson + " call to " + sPerson + " by " + phoneModel);
+            printName.print(from.getPersonName(), to.getPersonName());
+        } else
+            throw new CallOrMessageException("You can't make call from " + from.getPersonName() + " to " + to.getPersonName());
     }
 
     @Override
-    public void SendMessage(Person from, Person to, String mes) {
-        IPrintName printName = (fPerson, sPerson) -> LOGGER.info(fPerson + " send message \"" + mes + "\" to " + sPerson + " by " + phoneModel);
-        printName.print(from.getPersonName(), to.getPersonName());
+    public void SendMessage(Person from, Person to, String mes) throws CallOrMessageException {
+        if (!from.equals(to)) {
+            IPrintName printName = (fPerson, sPerson) -> LOGGER.info(fPerson + " send message \"" + mes + "\" to " + sPerson + " by " + phoneModel);
+            printName.print(from.getPersonName(), to.getPersonName());
+        } else
+            throw new CallOrMessageException("You can't send message from " + from.getPersonName() + " to " + to.getPersonName());
     }
 
     @Override
     public void workable() {
         LOGGER.info(getModel() + " is work!");
-    }
-
-    public static <T> void showOrder(List<T> list) {
-        for (T element : list) {
-            LOGGER.info(element);
-        }
     }
 }

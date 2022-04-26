@@ -1,7 +1,11 @@
 package phone;
 
+import exceptions.CallOrMessageException;
+
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+
 import static phone.Main.LOGGER;
 
 public abstract class Phone {
@@ -85,10 +89,16 @@ public abstract class Phone {
                 '}';
     }
 
-    public abstract void makeCall(Person from, Person to);
+    public abstract void makeCall(Person from, Person to) throws CallOrMessageException;
 
     public static void finalCurrentTime() {
         Date date = new Date();
         LOGGER.info("Current time: " + date);
+    }
+
+    public static <T> void showOrder(List<T> list) {
+        for (T element : list) {
+            LOGGER.info(element);
+        }
     }
 }
