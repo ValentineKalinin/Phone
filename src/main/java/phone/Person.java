@@ -2,11 +2,14 @@ package phone;
 
 import enums.Sex;
 import exceptions.BodyCharacteristicsException;
+
 import java.util.Objects;
+
 import static phone.Main.LOGGER;
 
 public class Person {
     private String personName;
+    private String personSurname;
     private String message;
     private Sex gender;
 
@@ -16,6 +19,13 @@ public class Person {
     public Person(String personName, String message, Sex gender) {
         this.message = message;
         this.personName = personName;
+        this.gender = gender;
+    }
+
+    public Person(String personName, String personSurname, String message, Sex gender) {
+        this.message = message;
+        this.personName = personName;
+        this.personSurname = personSurname;
         this.gender = gender;
     }
 
@@ -35,6 +45,14 @@ public class Person {
         return message;
     }
 
+    public String getPersonSurname() {
+        return personSurname;
+    }
+
+    public void setPersonSurname(String personSurname) {
+        this.personSurname = personSurname;
+    }
+
     public Sex getGender() {
         return gender;
     }
@@ -47,6 +65,7 @@ public class Person {
     public String toString() {
         return "Person{" +
                 "personName='" + personName + '\'' +
+                ", personSurname='" + personSurname + '\'' +
                 ", message='" + message + '\'' +
                 ", gender=" + gender +
                 '}';
@@ -57,19 +76,19 @@ public class Person {
         if (this == o) return true;
         if (!(o instanceof Person)) return false;
         Person person = (Person) o;
-        return Objects.equals(personName, person.personName) && Objects.equals(message, person.message) && gender == person.gender;
+        return Objects.equals(personName, person.personName) && Objects.equals(personSurname, person.personSurname) && Objects.equals(message, person.message) && gender == person.gender;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(personName, message, gender);
+        return Objects.hash(personName, personSurname, message, gender);
     }
 
     public final void BODY_MASS_INDEX(double height, double weight) throws BodyCharacteristicsException {
-        if (height <= 0 || weight <= 0) {
+        if (height > 0 && weight > 0) {
+            String bmi = String.format("%.2f", weight / (height * height));
+            LOGGER.info(personName + " BMI: " + bmi);
+        } else
             throw new BodyCharacteristicsException("Problem with body characteristics");
-        }
-        String bmi = String.format("%.2f", weight / (height * height));
-        LOGGER.info(personName + " BMI: " + bmi);
     }
 }
