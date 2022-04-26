@@ -29,7 +29,7 @@ public class Main {
 
     Battery batterySamsung = new Battery(4000, "Samsung");
     Battery batteryApple = new Battery(3500, "Apple");
-    Battery batteryXiaomi = new Battery(5000, "Xiaomi");
+    Battery batteryXiaomi = new Battery(-5000, "Xiaomi");
     Battery batterFax = new Battery(550, "Li-ion");
 
     Person alison = new Person(ALISON_NAME, "Hi, I'm Alison", Sex.WOMAN);
@@ -56,6 +56,8 @@ public class Main {
         LOGGER.info(screenApple.ppiOfScreen(scott.getPersonName()));
         LOGGER.info(samsungPhone.getModel());
         LOGGER.info(applePhone.getBattery());
+        LOGGER.info(xiaomiPhone.getBattery());
+        LOGGER.info(batteryXiaomi.workTime(alison.getPersonName()));
         LOGGER.info(screenSamsung.workTime(alison.getPersonName(), batterySamsung.getCapacity()));
 
         LOGGER.info("Model at Apple: " + applePhone.getModel());
@@ -139,12 +141,6 @@ public class Main {
 
     public List<MobilePhone> createPhoneList() {
         List<MobilePhone> order = new LinkedList<>();
-        /*order.add(samsungPhone);
-        order.add(applePhone);
-        order.add(xiaomiPhone);
-        //MobilePhone.showOrder(order);
-        return order;
-*/
         IntStream.range(0, COUNT_OF_SAMSUNG).mapToObj(i -> new MobilePhone()).forEach(phone -> {
             phone.setMessage(SAMMES + random.nextInt(BOUND));
             phone.setPhoneModel(SAMSUNG + random.nextInt(BOUND));
@@ -212,11 +208,11 @@ public class Main {
     public static void main(String[] args) throws ScreenDiagonalException, IOException, BodyCharacteristicsException {
         Main main = new Main();
         main.runBasicClass();
-        //main.runEnum();
-        //main.runCollections();
-        //main.runCountWords();
-        //main.runAnalyzeClass(main.samsungPhone);
-        //main.createPhoneList();
+        main.runEnum();
+        main.runCollections();
+        main.runCountWords();
+        main.runAnalyzeClass(main.samsungPhone);
+        main.createPhoneList();
         main.runFunctionalInterface();
         main.runSolvdLabaThreads();
     }
